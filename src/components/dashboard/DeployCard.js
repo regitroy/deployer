@@ -53,13 +53,15 @@ class DeployCard extends Component {
 
     render() { 
         let data = this.props.data;
+        let date = new Date(data.create_date);
         return (
             <Col md="4" style={{marginBottom: 20}}>
                 <Card>
                     <Card.Body>
                         <Card.Title>{data.name}</Card.Title>
-                        <Card.Text> Version: {data.version}</Card.Text>
-                        <Card.Text>Date: {data.create_date}</Card.Text>
+                        <Card.Text>Version: {data.version}</Card.Text>
+                        <Card.Text>Date: {date.toDateString()}</Card.Text>
+                        <Card.Text>URL: {data.url}</Card.Text>
                         
                         {this.state.finishedProgress ? (
                             <p>

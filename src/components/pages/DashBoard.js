@@ -20,6 +20,12 @@ class DashBoard extends Component {
         this.getHistory();
     }
 
+    // getMongoTime(id){
+    //     let timeStamp = parseInt(resp[0]._id.substr(0,8), 16)*1000
+    //     let date = new Date(timeStamp);
+
+    // }
+
     getHistory = () => {
         network.rest.get(network.apis.GET_HISTORY, (resp) => {
             this.props.resetHistory(resp);
