@@ -41,25 +41,31 @@ class DeployCard extends Component {
 
     loader() {
         return (
-            <p>
+            <div>
                 <ProgressBar animated now={this.state.progress} />
-            </p>
+            </div>
         );
     }
 
+    onDelete = (id) => {
+        this.props.onDelete(id);
+    }
+
     render() { 
+        let data = this.props.data;
         return (
             <Col md="4" style={{marginBottom: 20}}>
                 <Card>
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </Card.Text>
+                        <Card.Title>{data.name}</Card.Title>
+                        <Card.Text> Version: {data.version}</Card.Text>
+                        <Card.Text>Date: {data.create_date}</Card.Text>
                         
-                        
-                        {this.state.finishedProgress ? <p><Button variant="danger">Delete</Button></p> : this.loader()}
+                        {this.state.finishedProgress ? (
+                            <p>
+                                <Button variant="danger" onClick={() => this.onDelete(data._id)}>Delete</Button>
+                            </p> 
+                        ): this.loader()}
                     </Card.Body>
                 </Card>
             </Col>

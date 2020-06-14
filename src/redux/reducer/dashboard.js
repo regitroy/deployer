@@ -1,27 +1,8 @@
 import actionType from '../actionType';
 let initialState = {
     showCreateModal: false,
-    deployments: [
-        {
-            "_id": "acbcnnd",
-            "name": "Natural One",
-            "versions": [
-                "1.0.0",
-                "1.0.1",
-                "1.1.0",
-                "2.0.0"
-            ]
-        },
-        {
-            "_id": "acbcnn12",
-            "name": "Techno 01",
-            "versions": [
-                "1.0.0",
-                "1.1.1",
-                "2.0.1"
-            ]
-        }
-    ]
+    deployments: [],
+    histories: []
 }
 
 export default (state = initialState, action) => {
@@ -40,6 +21,24 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 ...{deployments: action.data}
+            }
+        case actionType.ADD_DEPLOYMENT_HISTORY: 
+            return {
+                ...state,
+                ...{histories: [...state.histories, action.data]}
+            }
+        case actionType.RESET_DEPLOYMENT_HISTORY:
+            return {
+                ...state,
+                ...{histories: action.data}
+            }
+        case actionType.DELETE_DEPLOYMENT_HISTORY: 
+            let history = state.histories.filter((d) => {
+                return d._id != action.id
+            })
+            return {
+                ...state,
+                ...{histories: history}
             }
         default:
             return state;

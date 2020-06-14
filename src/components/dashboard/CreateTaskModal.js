@@ -6,12 +6,41 @@ class CreateTaskModal extends Component {
         super(props);
         this.state = {
             modalShow: false,
-            versions: []
+            versions: [],
+            createNewData: {
+                templete: "",
+                url: "",
+                version: ""
+            }
         }
     }
 
     setModalShow = () => {
         this.props.onCreateModelHide();
+    }
+
+    setUrl = (event) => {
+        if(!event.target.value){
+            return;
+        }
+        this.setState({
+            createNewData: {
+                ...this.state.createNewData,
+                ...{url: event.target.value}
+            }
+        });
+    }
+
+    setVersion = (event) => {
+        if(!event.target.value){
+            return;
+        }
+        this.setState({
+            createNewData: {
+                ...this.state.createNewData,
+                ...{version: event.target.value}
+            }
+        });
     }
 
     setVersionOptions = (event) => {
@@ -23,12 +52,17 @@ class CreateTaskModal extends Component {
             return;
         }
         this.setState({
-            versions: deploymentData[0].versions
+            versions: deploymentData[0].versions,
+            createNewData: {
+                ...this.state.createNewData,
+                ...{templete: event.target.value}
+            }
         });
     }
 
     onFormSubmit = () => {
-        return false;
+        this.props.createHistory(this.state.createNewData);
+        this.props.onCreateModelHide();
     }
 
     modal(){
@@ -46,10 +80,10 @@ class CreateTaskModal extends Component {
                     <Container>
                         <Row>
                             <Col>
-                                <Form onSubmit={this.onFormSubmit}>
+                                {/* <Form onSubmit={return false}> */}
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>URL</Form.Label>
-                                        <Form.Control type="email" placeholder="Enter url" />
+                                        <Form.Control type="text" placeholder="Enter url" onKeyUp={this.setUrl} />
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicPassword">
@@ -72,6 +106,7 @@ class CreateTaskModal extends Component {
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Version</Form.Label>
                                         <Form.Control as="select" defaultValue="Choose..."
+                                            onChange={this.setVersion}
                                             >
                                             <option>Choose...</option>
                                             {
@@ -83,10 +118,10 @@ class CreateTaskModal extends Component {
                                             }
                                         </Form.Control>
                                     </Form.Group>
-                                    <Button variant="primary" type="submit">
+                                    <Button variant="primary" type="submit" onClick={this.onFormSubmit}>
                                         Submit
                                     </Button>
-                                </Form>
+                                {/* </Form> */}
                             </Col>
                         </Row>
                     </Container>

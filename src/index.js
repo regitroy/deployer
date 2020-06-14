@@ -5,19 +5,28 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import store from './redux/store';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import DashBoard from './components/pages/DashBoard';
+import Login from './components/pages/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
+      <div>
+        <ToastContainer />
+      </div>
+      
       <Router>
+        <Switch>
         <div>
-          <Route path="/" component={DashBoard} />
+          <Route path="/">
+            <DashBoard/>
+          </Route>
         </div>
-    </Router>
-    </React.StrictMode>
+        </Switch>
+      </Router>
   </Provider>,
   document.getElementById('root')
 );

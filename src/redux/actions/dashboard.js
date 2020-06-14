@@ -16,5 +16,23 @@ export default {
             type: actionType.SET_DEPLOYMENT_TYPE,
             data
         }
+    },
+    setHistory: (data) => {
+        return {
+            type: actionType.RESET_DEPLOYMENT_HISTORY,
+            data
+        }
+    },
+    addHistory: (data) => {
+        return {
+            type: actionType.ADD_DEPLOYMENT_HISTORY,
+            data
+        }
+    },
+    deleteHistory: (id) => {
+        return {
+            type: actionType.DELETE_DEPLOYMENT_HISTORY,
+            id
+        }
     }
 }
