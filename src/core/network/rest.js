@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'https://morning-taiga-49889.herokuapp.com';
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
